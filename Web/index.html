@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spam Detector — AI-Powered Message Classifier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-logo">Spam<span>Detect</span></div>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#tech-stack">Tech Stack</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-content">
+    <p class="hero-tag">Machine Learning Project</p>
+    <h1>AI-Powered Spam Detection System</h1>
+    <p class="hero-subtext">Classifying messages as spam or legitimate in real time, using natural language processing and probabilistic machine learning.</p>
+    <a href="#demo" class="btn-primary">Try Live Demo</a>
+  </div>
+</header>
+<section class="problem" id="problem">
+  <div class="section-inner">
+    <p class="section-tag">The Problem</p>
+    <h2>Spam is more than an annoyance</h2>
+    <div class="problem-grid">
+      <div class="problem-card fade-in">
+        <h3>Security Risk</h3>
+        <p>Phishing and scam messages disguised as legitimate texts put users at risk of fraud and data theft.</p>
+      </div>
+      <div class="problem-card fade-in">
+        <h3>Not Scalable Manually</h3>
+        <p>Filtering thousands of messages by hand is impossible — platforms need automated, real-time classification.</p>
+      </div>
+      <div class="problem-card fade-in">
+        <h3>Poor UX Without Filtering</h3>
+        <p>Unfiltered spam clutters inboxes and erodes trust in messaging platforms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solution" id="solution">
+  <div class="section-inner">
+    <p class="section-tag">The Solution</p>
+    <h2>Machine learning that classifies in milliseconds</h2>
+    <p class="solution-text fade-in">
+      This system uses <strong>TF-IDF text vectorization</strong> combined with a
+      <strong>Multinomial Naive Bayes classifier</strong> to analyze message content and
+      predict whether it's spam or legitimate — instantly, with a confidence score attached
+      to every prediction.
+    </p>
+  </div>
+</section>
+<section class="demo" id="demo">
+  <div class="section-inner">
+    <p class="section-tag">Live Demo</p>
+    <h2>Try it yourself</h2>
+    <p class="demo-subtext">Type a message below or pick an example — see how the model classifies it.</p>
+
+    <div class="demo-box fade-in">
+      <textarea id="messageInput" placeholder="Type a message here... e.g. 'Congratulations! You won a free prize, call now!'"></textarea>
+
+      <div class="demo-examples">
+        <button class="chip" data-msg="Congratulations! You won a free prize, call now! Claim before it expires.">Try spam example</button>
+        <button class="chip" data-msg="Hey, are we still meeting for lunch tomorrow at 1pm?">Try ham example</button>
+      </div>
+
+      <button class="btn-primary" id="checkBtn">Check Message</button>
+
+      <div class="demo-result" id="resultBox" style="display:none;">
+        <div class="result-label" id="resultLabel"></div>
+        <div class="result-confidence" id="resultConfidence"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="how-it-works" id="how-it-works">
+  <div class="section-inner">
+    <p class="section-tag">How It Works</p>
+    <h2>Under the hood</h2>
+
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-number">01</div>
+        <h3>Text Vectorization (TF-IDF)</h3>
+        <p>Each message is converted into a numerical representation. Words that are rare but distinctive — like "prize" or "winner" — are weighted higher than common filler words like "the" or "is."</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">02</div>
+        <h3>Classification (Naive Bayes)</h3>
+        <p>A probabilistic model trained on thousands of labeled messages calculates the likelihood a message is spam versus legitimate, based on the patterns it learned during training.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">03</div>
+        <h3>Prediction + Confidence Score</h3>
+        <p>The system returns not just a label, but a confidence percentage — giving a clearer picture of how certain the model is, not just a binary yes/no.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="results" id="results">
+  <div class="section-inner">
+    <p class="section-tag">Results</p>
+    <h2>Model performance</h2>
+
+    <div class="results-grid">
+      <div class="result-card fade-in">
+        <div class="result-number">96.8%</div>
+        <div class="result-desc">Overall Accuracy</div>
+      </div>
+      <div class="result-card fade-in">
+        <div class="result-number">100%</div>
+        <div class="result-desc">Spam Precision</div>
+      </div>
+      <div class="result-card fade-in">
+        <div class="result-number">77%</div>
+        <div class="result-desc">Spam Recall</div>
+      </div>
+    </div>
+
+    <p class="results-note">
+      The model achieves perfect precision on spam detection — meaning when it flags a message as spam, it is always correct. It takes a cautious approach, occasionally letting borderline spam through as legitimate rather than risking false positives on real messages.
+    </p>
+  </div>
+</section>
+
+<section class="tech-stack" id="tech-stack">
+  <div class="section-inner">
+    <p class="section-tag">Tech Stack</p>
+    <h2>Built with</h2>
+
+    <div class="tech-grid">
+      <div class="tech-item fade-in">Python</div>
+      <div class="tech-item fade-in">scikit-learn</div>
+      <div class="tech-item fade-in">pandas</div>
+      <div class="tech-item fade-in">TF-IDF</div>
+      <div class="tech-item fade-in">Naive Bayes</div>
+      <div class="tech-item fade-in">Flask</div>
+      <div class="tech-item fade-in">HTML / CSS / JS</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="section-inner footer-inner">
+    <p>Built by Faiza — AI/ML & Full-Stack Developer</p>
+    <div class="footer-links">
+      <a href="#" target="_blank">GitHub</a>
+      <a href="#hero">Back to Top</a>
+    </div>
+  </div>
+</footer>
+<script>
+
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, index * 80); // slight stagger
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+fadeElements.forEach(el => observer.observe(el));
+  const messageInput = document.getElementById('messageInput');
+  const checkBtn = document.getElementById('checkBtn');
+  const resultBox = document.getElementById('resultBox');
+  const resultLabel = document.getElementById('resultLabel');
+  const resultConfidence = document.getElementById('resultConfidence');
+  const chips = document.querySelectorAll('.chip');
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      messageInput.value = chip.getAttribute('data-msg');
+    });
+  });
+
+
+  function mockPredict(message) {
+    const spamKeywords = ['won', 'free', 'prize', 'call now', 'claim', 'urgent', 'cash', 'winner', 'click', 'congratulations'];
+    const lower = message.toLowerCase();
+    const matches = spamKeywords.filter(word => lower.includes(word)).length;
+
+    const isSpam = matches > 0;
+    const confidence = isSpam
+      ? Math.min(0.7 + matches * 0.08, 0.98)
+      : Math.random() * 0.15 + 0.02;
+
+    return { isSpam, confidence };
+  }
+
+  checkBtn.addEventListener('click', () => {
+    const message = messageInput.value.trim();
+    if (!message) return;
+
+    const { isSpam, confidence } = mockPredict(message);
+
+    resultBox.style.display = 'block';
+    resultLabel.textContent = isSpam ? 'Spam Detected' : 'Not Spam';
+    resultLabel.style.color = isSpam ? '#FF5C7A' : '#00E5A0';
+    resultConfidence.textContent = `Confidence: ${(confidence * 100).toFixed(1)}%`;
+  });
+</script>
+
+</body>
+</html>
