@@ -166,7 +166,36 @@
   </div>
 </footer>
 <script>
-checkBtn.addEventListener('click', async () => {
+  
+  const fadeElements = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  fadeElements.forEach(el => observer.observe(el));
+
+ 
+  const messageInput = document.getElementById('messageInput');
+  const checkBtn = document.getElementById('checkBtn');
+  const resultBox = document.getElementById('resultBox');
+  const resultLabel = document.getElementById('resultLabel');
+  const resultConfidence = document.getElementById('resultConfidence');
+  const chips = document.querySelectorAll('.chip');
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      messageInput.value = chip.getAttribute('data-msg');
+    });
+  });
+
+  
+  checkBtn.addEventListener('click', async () => {
     const message = messageInput.value.trim();
     if (!message) return;
 
@@ -174,29 +203,29 @@ checkBtn.addEventListener('click', async () => {
     checkBtn.textContent = "Checking...";
 
     try {
-        const response = await fetch('/predict', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: message })
-        });
-        const data = await response.json();
+      const response = await fetch('/predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message })
+      });
+      const data = await response.json();
 
-        const isSpam = data.prediction === 'spam';
+      const isSpam = data.prediction === 'spam';
 
-        resultBox.style.display = 'block';
-        resultLabel.textContent = isSpam ? 'Spam Detected' : 'Not Spam';
-        resultLabel.style.color = isSpam ? '#FF5C7A' : '#00E5A0';
-        resultConfidence.textContent = `Confidence: ${(data.spam_probability * 100).toFixed(1)}%`;
+      resultBox.style.display = 'block';
+      resultLabel.textContent = isSpam ? 'Spam Detected' : 'Not Spam';
+      resultLabel.style.color = isSpam ? '#FF5C7A' : '#00E5A0';
+      resultConfidence.textContent = `Confidence: ${(data.spam_probability * 100).toFixed(1)}%`;
     } catch (err) {
-        resultBox.style.display = 'block';
-        resultLabel.textContent = 'Error';
-        resultLabel.style.color = '#FF5C7A';
-        resultConfidence.textContent = 'Could not reach the server. Try again.';
+      resultBox.style.display = 'block';
+      resultLabel.textContent = 'Error';
+      resultLabel.style.color = '#FF5C7A';
+      resultConfidence.textContent = 'Could not reach the server. Try again.';
     } finally {
-        checkBtn.disabled = false;
-        checkBtn.textContent = 'Check Message';
+      checkBtn.disabled = false;
+      checkBtn.textContent = 'Check Message';
     }
-});
+  });
 </script>
 
 </body>
