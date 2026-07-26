@@ -1,15 +1,21 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import pickle
 from flask_cors import CORS
+
 app = Flask(__name__)
 CORS(app)
 
-# Load model and vectorizer once, at startup (not on every request)
+# Load model and vectorizer once, at startup
 with open("Model/spam_model.pkl", "rb") as f:
     model = pickle.load(f)
 
 with open("Model/tfidf_vectorizer.pkl", "rb") as f:
     tfidf = pickle.load(f)
+
+
+@app.route("/", methods=["GET"])
+def home():
+    return render_template("index.html")
 
 
 @app.route("/predict", methods=["POST"])
@@ -29,11 +35,6 @@ def predict():
         "prediction": "spam" if prediction == 1 else "ham",
         "spam_probability": round(float(probability[1]), 4)
     })
-
-
-@app.route("/", methods=["GET"])
-def home():
-    return jsonify({"status": "Spam Detector API is running"})
 
 
 if __name__ == "__main__":
